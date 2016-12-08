@@ -57,12 +57,12 @@ class App{
 
         }
 
+
         if(isset($_GET['page'])){
 
             $controllerName = ucfirst($_GET['page']) . 'Controller';
             $methodName = isset($_GET['action']) ? $_GET['action'] : 'index';
             $controller = new $controllerName();
-
             $data = [
 
                 'content_data' => $controller->$methodName($_GET),
@@ -71,9 +71,21 @@ class App{
 
             ];
 
+
+
+            $view = $controller->view . '/' . $methodName . '.html';
+
             if(!isset($_GET['asAjax'])){
 
-                $loader = new Twig_Loader_Filesystem(Config::get('path_templates'))
+                $loader = new Twig_Loader_Filesystem(Config::get('path_templates'));
+                $twig = new Twig_Environment($loader);
+                $template = $twig->loadTemplate($view);
+
+                echo $template->render($data);
+
+            } else {
+
+                echo json_encode($data);
 
             }
 
