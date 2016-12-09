@@ -1,16 +1,16 @@
 <?php
 abstract class Model{
 
-    protected static $table;
+    protected static $table; // Объявляем свойство $table - вопрос - Для чего?
 
-    protected static $properties = [
+    protected static $properties = [    // создаем двумерный массив свойств... Для чего?
 
-        'id' => [
+        'id' => [                       // Для чего нужен id? Где он используется?
 
             'type' => 'int',
             'autoincrement' => true,
             'readonly' => true,
-            'unsigned' => true
+            'unsigned' => true          // Похоже что-то на создание столбца в таблице, но в нашем контексте все равно не понятно
 
         ],
 
@@ -38,11 +38,11 @@ abstract class Model{
 
     ];
 
-    public function __construct(array $values){
+    public function __construct(array $values){    // Слово array для чего? Явно указать что здесь массив?
 
-        static::setProperties();
+        static::setProperties();                    // Я так понимаю, переопределяется этот метод в потомках
 
-        foreach ($values as $key => $value){
+        foreach ($values as $key => $value){        // Посмотрю где по коду создаются потомки и что там им в конструктор передается
 
             $this->$key = $value;
 
@@ -52,7 +52,7 @@ abstract class Model{
 
     protected static function setProperties(){
 
-        return true;
+        return true;                                // Никогда не сработает в нашем контексте?
 
     }
 

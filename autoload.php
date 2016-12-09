@@ -7,7 +7,6 @@ Twig_Autoloader::register();
 spl_autoload_register("gbStandardAutoload");
 
 function gbStandardAutoload($className){
-
     // Папки с классами для загрузки
     $dirs = [
 
